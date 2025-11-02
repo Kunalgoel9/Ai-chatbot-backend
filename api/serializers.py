@@ -5,7 +5,7 @@ from . models import Website,ScrapedPage,ChatSession,Message
 class WebsiteSerializer(serializers.ModelSerializer):
     class Meta:
         model=Website
-        fields=['url','title','total_pages','status','created_at','updated_at']
+        fields=['id','url','title','total_pages','status','created_at','updated_at']
 
 class ScrapedPageSerializer(serializers.ModelSerializer):
     class Meta:

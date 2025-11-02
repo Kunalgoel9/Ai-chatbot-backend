@@ -1,13 +1,11 @@
-
 from django.urls import path
-
-from . views import WebsiteViewSet,ChatSessionViewSet,MessageViewSet
-
 from rest_framework.routers import DefaultRouter
+from .views import WebsiteViewSet, ScrapedPageViewSet, ChatSessionViewSet, MessageViewSet
 
-router=DefaultRouter()
+router = DefaultRouter()
+router.register('websites', WebsiteViewSet, basename='websites')
+router.register('scraped-pages', ScrapedPageViewSet, basename='scraped-pages')
+router.register('chat-sessions', ChatSessionViewSet, basename='chat-sessions')
+router.register('messages', MessageViewSet, basename='messages')
 
-router.register('websites',viewset=WebsiteViewSet,basename='websites')
-router.register('chat-sessions',viewset=ChatSessionViewSet,basename='chat-sessions')
-router.register('messages',viewset=MessageViewSet,basename='messages')
 urlpatterns = router.urls

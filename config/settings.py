@@ -113,7 +113,7 @@ CORS_ALLOWED_ORIGINS = [
 
 CORS_ALLOW_CREDENTIALS = True
 
-# Celery Configuration
+# Celery Configuration (using Redis Cloud)
 CELERY_BROKER_URL = config('CELERY_BROKER_URL', default='redis://localhost:6379/0')
 CELERY_RESULT_BACKEND = config('CELERY_RESULT_BACKEND', default='redis://localhost:6379/0')
 CELERY_ACCEPT_CONTENT = ['json']
@@ -121,9 +121,19 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'UTC'
 
-# Qdrant Configuration
+# Optional: Store task results in Django DB as well
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_CACHE_BACKEND = 'django-cache'
+
+# Qdrant Configuration (Cloud)
+QDRANT_URL = config('QDRANT_URL', default=None)  # For cloud: https://xxx.qdrant.io
+QDRANT_API_KEY = config('QDRANT_API_KEY', default=None)
 QDRANT_HOST = config('QDRANT_HOST', default='localhost')
 QDRANT_PORT = config('QDRANT_PORT', default=6333, cast=int)
+QDRANT_COLLECTION_NAME = 'website_embeddings'
 
 # Gemini API
 GEMINI_API_KEY = config('GEMINI_API_KEY', default='')
+
+# Redis URL
+REDIS_URL = config('REDIS_URL', default='redis://localhost:6379/0')
